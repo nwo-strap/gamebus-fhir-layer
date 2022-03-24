@@ -1,0 +1,52 @@
+{
+  "id": "Gender",
+  "resourceType": "ConceptMap",
+  "version": "v0.1",
+  "status": "active",
+  "group": [
+    {
+      "element": [
+        {
+          "code": "F",
+          "display": "Female",
+          "target": [
+            {
+              "code": "female",
+              "display": "Female",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "M",
+          "display": "Male",
+          "target": [
+            {
+              "code": "male",
+              "display": "Male",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "O",
+          "display": "Other",
+          "target": [
+            {
+              "code": "other",
+              "display": "Other",
+              "equivalence": "equivalent"
+            }
+          ]
+        }
+      ],
+      "unmapped": {
+        "mode": "fixed",
+        "code": "unknown",
+        "display": "Unknown"
+      },
+      "source": "GameBusGender",
+      "target": "http://hl7.org/fhir/administrative-gender"
+    }
+  ]
+}

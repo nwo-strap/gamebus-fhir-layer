@@ -1,0 +1,122 @@
+[
+  {
+    "category": [
+      {
+        "coding": [
+          {
+            "code": "vital-signs",
+            "display": "Vital Signs",
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "version": "v0.1"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "code": "85354-9",
+          "display": "Blood pressure panel with all children optional",
+          "system": "http://loinc.org",
+          "version": "v0.1"
+        }
+      ]
+    },
+    "component": [
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "8462-4",
+              "display": "Diastolic blood pressure",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 69658
+          }
+        ],
+        "valueQuantity": {
+          "code": "mm[Hg]",
+          "system": "http://unitsofmeasure.org",
+          "unit": "mm[Hg]",
+          "value": 80
+        }
+      },
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 69659
+          }
+        ],
+        "valueQuantity": {
+          "code": "mm[Hg]",
+          "system": "http://unitsofmeasure.org",
+          "unit": "mm[Hg]",
+          "value": 120
+        }
+      }
+    ],
+    "device": {
+      "display": "GameBus",
+      "identifier": {
+        "system": "https://gamebus.eu/activity#dataProvider",
+        "value": "1"
+      },
+      "type": "Device"
+    },
+    "effectiveInstant": "2021-06-09T15:40:41.000+02:00",
+    "extension": [
+      {
+        "url": "https://gamebus.eu/activity#isManual",
+        "valueBoolean": true
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#image",
+        "valueUrl": "https://example.com/bp.png"
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#isAggregate",
+        "valueBoolean": false
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#image",
+        "valueUrl": "https://example.com/GameBus.png"
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#isConnected",
+        "valueBoolean": false
+      }
+    ],
+    "id": "27194",
+    "performer": [
+      {
+        "display": "Meimei Han",
+        "reference": "Patient/523",
+        "type": "Patient"
+      }
+    ],
+    "resourceType": "Observation",
+    "status": "final",
+    "subject": {
+      "display": "Meimei Han",
+      "reference": "Patient/523",
+      "type": "Patient"
+    }
+  }
+]

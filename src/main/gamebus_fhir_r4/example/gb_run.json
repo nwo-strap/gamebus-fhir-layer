@@ -1,0 +1,1240 @@
+{
+  "id": 27025,
+  "date": 1622204196000,
+  "isManual": true,
+  "group": null,
+  "image": null,
+  "creator": {
+    "id": 523,
+    "user": {
+      "id": 515,
+      "firstName": "Meimei",
+      "lastName": "Han",
+      "image": "https://example.com/MeimeiHan.jpg"
+    }
+  },
+  "player": {
+    "id": 523,
+    "user": {
+      "id": 515,
+      "firstName": "Meimei",
+      "lastName": "Han",
+      "image": "https://example.com/MeimeiHan.jpg"
+    }
+  },
+  "gameDescriptor": {
+    "id": 2,
+    "translationKey": "RUN",
+    "image": "https://example.com/RUN.png",
+    "type": "PHYSICAL",
+    "isAggregate": false
+  },
+  "dataProvider": {
+    "id": 1,
+    "name": "GameBus",
+    "image": "https://example.com/GameBus.png",
+    "isConnected": false
+  },
+  "propertyInstances": [
+    {
+      "id": 866603,
+      "value": "1000",
+      "property": {
+        "id": 2,
+        "translationKey": "DISTANCE",
+        "baseUnit": "meters",
+        "inputType": "DISTANCE",
+        "aggregationStrategy": "SUM",
+        "propertyPermissions": [
+          {
+            "id": 40,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 47,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 229,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 232,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 242,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 245,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 335,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 338,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 340,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 344,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 348,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 647,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 651,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 654,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 659,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 664,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 669,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 675,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 679,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 682,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 687,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 692,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 697,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 730,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 741,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 761,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 1265,
+            "index": null,
+            "lastUpdate": 1619419282000,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 1267,
+            "index": null,
+            "lastUpdate": 1619519302000,
+            "decisionNote": null,
+            "state": "TESTING_ONLY",
+            "allowedValues": []
+          },
+          {
+            "id": 1304,
+            "index": null,
+            "lastUpdate": 1621495167000,
+            "decisionNote": null,
+            "state": "PUBLIC_REQUESTED",
+            "allowedValues": []
+          },
+          {
+            "id": 1340,
+            "index": null,
+            "lastUpdate": 1622207020000,
+            "decisionNote": null,
+            "state": "TESTING_ONLY",
+            "allowedValues": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 866604,
+      "value": "360",
+      "property": {
+        "id": 3,
+        "translationKey": "DURATION",
+        "baseUnit": "seconds",
+        "inputType": "DURATION",
+        "aggregationStrategy": "SUM",
+        "propertyPermissions": [
+          {
+            "id": 41,
+            "index": 1,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 48,
+            "index": 1,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 56,
+            "index": 1,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 58,
+            "index": 1,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 167,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 169,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 171,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 173,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 177,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 179,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 183,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 185,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 187,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 189,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 195,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 197,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 201,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 203,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 213,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 223,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 227,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 230,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 240,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 243,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 249,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 252,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 258,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 262,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 264,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 266,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 336,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 339,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 341,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 345,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 349,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 458,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 490,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 493,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 496,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 500,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 560,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 562,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 564,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 565,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 648,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 652,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 655,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 660,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 665,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 670,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 676,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 680,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 683,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 688,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 693,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 698,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 721,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 731,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 742,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 762,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 1183,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 1260,
+            "index": null,
+            "lastUpdate": 1616660869000,
+            "decisionNote": null,
+            "state": "TESTING_ONLY",
+            "allowedValues": []
+          },
+          {
+            "id": 1261,
+            "index": null,
+            "lastUpdate": 1616660878000,
+            "decisionNote": null,
+            "state": "TESTING_ONLY",
+            "allowedValues": []
+          },
+          {
+            "id": 1339,
+            "index": null,
+            "lastUpdate": 1622207091000,
+            "decisionNote": null,
+            "state": "PUBLIC_REQUESTED",
+            "allowedValues": []
+          },
+          {
+            "id": 1341,
+            "index": null,
+            "lastUpdate": 1622207038000,
+            "decisionNote": null,
+            "state": "TESTING_ONLY",
+            "allowedValues": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 866605,
+      "value": "80",
+      "property": {
+        "id": 66,
+        "translationKey": "KCALORIES",
+        "baseUnit": "kilo calories",
+        "inputType": "INT",
+        "aggregationStrategy": "AVERAGE",
+        "propertyPermissions": [
+          {
+            "id": 168,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 170,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 172,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 174,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 178,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 180,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 184,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 186,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 188,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 190,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 196,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 198,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 202,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 204,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 214,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 228,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 231,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 241,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 244,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 250,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 253,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 259,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 337,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 343,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 347,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 351,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 494,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 498,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 502,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 573,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 582,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 649,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 657,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 662,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 667,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 673,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 677,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 685,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 690,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 695,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 701,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 722,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 734,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 745,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          },
+          {
+            "id": 775,
+            "index": 0,
+            "lastUpdate": null,
+            "decisionNote": null,
+            "state": "PUBLIC_APPROVED",
+            "allowedValues": []
+          }
+        ]
+      }
+    }
+  ],
+  "personalPoints": [
+    {
+      "id": 6189,
+      "value": 100,
+      "participation": {
+        "date": 1622204186000,
+        "points": 0.0,
+        "owned": false,
+        "withNudging": true,
+        "challenge": {
+          "id": 2861,
+          "name": "Running game",
+          "image": null,
+          "availableDate": 1622066400000,
+          "startDate": 1622204100000,
+          "endDate": 1622205060000
+        },
+        "circle": {
+          "id": 100779,
+          "name": "Meimei Han",
+          "image": null,
+          "isPrivate": true
+        }
+      },
+      "challengeRule": {
+        "id": 3109,
+        "name": "10min running game",
+        "description": null,
+        "image": null,
+        "imageRequired": false,
+        "videoAllowed": null,
+        "imageAllowed": null,
+        "backendOnly": false,
+        "maxTimesFired": 10,
+        "minDaysBetweenFire": 1,
+        "numberOfFiresInTimeWindow": 0
+      }
+    }
+  ],
+  "supports": [],
+  "chats": []
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "category": [
+      {
+        "coding": [
+          {
+            "code": "activity",
+            "display": "Activity",
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "version": "v0.1"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "code": "LA11836-6",
+          "display": "Running",
+          "system": "http://loinc.org",
+          "version": "v0.1"
+        }
+      ]
+    },
+    "component": [
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "55412-1",
+              "display": "Exercise distance unspecified time",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 866603
+          }
+        ],
+        "valueQuantity": {
+          "code": "m",
+          "system": "http://unitsofmeasure.org",
+          "unit": "meter",
+          "value": 1000
+        }
+      },
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "55411-3",
+              "display": "Exercise duration",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 866604
+          }
+        ],
+        "valueQuantity": {
+          "code": "s",
+          "system": "http://unitsofmeasure.org",
+          "unit": "second",
+          "value": 360
+        }
+      },
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "55421-2",
+              "display": "Calories burned Machine estimate",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 866605
+          }
+        ],
+        "valueQuantity": {
+          "code": "kcal",
+          "system": "http://unitsofmeasure.org",
+          "unit": "kilocalorie",
+          "value": 80
+        }
+      }
+    ],
+    "device": {
+      "display": "GameBus",
+      "identifier": {
+        "system": "https://gamebus.eu/activity#dataProvider",
+        "value": "1"
+      },
+      "type": "Device"
+    },
+    "effectiveInstant": "2021-05-28T14:16:36.000+02:00",
+    "extension": [
+      {
+        "url": "https://gamebus.eu/activity#isManual",
+        "valueBoolean": true
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#image",
+        "valueUrl": "https://example.com/RUN.png"
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#isAggregate",
+        "valueBoolean": false
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#image",
+        "valueUrl": "https://example.com/GameBus.png"
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#isConnected",
+        "valueBoolean": false
+      }
+    ],
+    "id": "27025",
+    "performer": [
+      {
+        "display": "Meimei Han",
+        "reference": "Patient/523",
+        "type": "Patient"
+      }
+    ],
+    "resourceType": "Observation",
+    "status": "final",
+    "subject": {
+      "display": "Meimei Han",
+      "reference": "Patient/523",
+      "type": "Patient"
+    }
+  }
+]

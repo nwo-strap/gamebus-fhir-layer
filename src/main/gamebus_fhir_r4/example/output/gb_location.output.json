@@ -1,0 +1,112 @@
+[
+  {
+    "category": [
+      {
+        "coding": [
+          {
+            "code": "activity",
+            "display": "Activity",
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "version": "v0.1"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "code": "56816-2",
+          "display": "Patient location",
+          "system": "http://loinc.org",
+          "version": "v0.1"
+        }
+      ]
+    },
+    "component": [
+      {
+        "code": {
+          "coding": [
+            {
+              "code": "55411-3",
+              "display": "Exercise duration",
+              "system": "http://loinc.org",
+              "version": "v0.1"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://gamebus.eu/PropertyInstances#id",
+            "valueInteger": 870781
+          }
+        ],
+        "valueQuantity": {
+          "code": "s",
+          "system": "http://unitsofmeasure.org",
+          "unit": "second",
+          "value": 600
+        }
+      }
+    ],
+    "device": {
+      "display": "GameBus",
+      "identifier": {
+        "system": "https://gamebus.eu/activity#dataProvider",
+        "value": "1"
+      },
+      "type": "Device"
+    },
+    "effectiveInstant": "2022-03-08T15:39:03.000+01:00",
+    "extension": [
+      {
+        "url": "https://gamebus.eu/activity#isManual",
+        "valueBoolean": true
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#image",
+        "valueUrl": "https://example.com/LOCATION.png"
+      },
+      {
+        "url": "https://gamebus.eu/gameDescriptor#isAggregate",
+        "valueBoolean": false
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#image",
+        "valueUrl": "https://example.com/GameBus.png"
+      },
+      {
+        "url": "https://gamebus.eu/dataProvider#isConnected",
+        "valueBoolean": false
+      }
+    ],
+    "focus": [
+      {
+        "reference": "Location/789729",
+        "type": "Location"
+      }
+    ],
+    "id": "789729",
+    "performer": [
+      {
+        "display": "Meimei Han",
+        "reference": "Patient/802",
+        "type": "Patient"
+      }
+    ],
+    "resourceType": "Observation",
+    "status": "final",
+    "subject": {
+      "display": "Meimei Han",
+      "reference": "Patient/802",
+      "type": "Patient"
+    }
+  },
+  {
+    "id": "789729",
+    "position": {
+      "latitude": 52.0929444989348,
+      "longitude": 5.10797801626066
+    },
+    "resourceType": "Location"
+  }
+]

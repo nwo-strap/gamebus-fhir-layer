@@ -1,0 +1,85 @@
+{
+  "id": "ObservationComponentCode",
+  "resourceType": "ConceptMap",
+  "version": "v0.1",
+  "status": "active",
+  "group": [
+    {
+      "element": [
+        {
+          "code": "STEPS",
+          "display": "STEPS",
+          "target": [
+            {
+              "code": "55423-8",
+              "display": "Number of steps in unspecified time Pedometer",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "DISTANCE",
+          "display": "DISTANCE",
+          "target": [
+            {
+              "code": "55412-1",
+              "display": "Exercise distance unspecified time",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+         "code": "DURATION",
+         "display": "DURATION",
+          "target": [
+            {
+              "code": "55411-3",
+              "display": "Exercise duration",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "KCALORIES",
+          "display": "KCALORIES",
+          "target": [
+            {
+              "code": "55421-2",
+              "display": "Calories burned Machine estimate",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "BP_DIA_MMOLL",
+          "display": "BP_DIA_MMOLL",
+          "target": [
+            {
+              "code": "8462-4",
+              "display": "Diastolic blood pressure",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "BP_SYS_MMOLL",
+          "display": "BP_SYS_MMOLL",
+          "target": [
+            {
+              "code": "8480-6",
+              "display": "Systolic Blood Pressure",
+              "equivalence": "equivalent"
+            }
+          ]
+        }
+      ],
+      "unmapped": {
+        "mode": "fixed",
+        "code": "unknown",
+        "display": "Unknown"
+      },
+      "source": "GameBusProperty",
+      "target": "http://loinc.org"
+    }
+  ]
+}

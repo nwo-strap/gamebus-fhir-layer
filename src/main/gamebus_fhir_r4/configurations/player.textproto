@@ -1,0 +1,40 @@
+library_config: {
+  user_libraries: {
+    type: MAPPING_LANGUAGE
+    path: { local_path: "src/main/gamebus_fhir_r4/projector_library/resources.wstl" }
+  }
+  user_libraries: {
+    type: MAPPING_LANGUAGE
+    path: { local_path: "src/main/gamebus_fhir_r4/projector_library/datatypes.wstl" }
+  }
+}
+
+harmonization_config: {
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/Activity2Resource.harmonization.json"
+  }
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/Unit.harmonization.json"
+  }
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/Gender.harmonization.json"
+  }
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/ObservationCode.harmonization.json"
+  }
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/ObservationCategory.harmonization.json"
+  }
+  code_lookup: {
+    local_path: "src/main/gamebus_fhir_r4/code_harmonization/ObservationComponent.harmonization.json"
+  }
+}
+
+structure_mapping_config: {
+  mapping_path_config: {
+    mapping_type: MAPPING_LANGUAGE
+    mapping_config_path: {
+      local_path: "src/main/gamebus_fhir_r4/configurations/player.wstl"
+    }
+  }
+}

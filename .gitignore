@@ -1,0 +1,3 @@
+target
+src/main/resources/config.properties
+src/main/resources/token.properties

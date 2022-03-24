@@ -1,0 +1,105 @@
+// Description: Transform GameBus Player to FHIR Patient
+//
+// Argument(s):
+//   Player: GameBus Player
+//
+// Output(s):
+//   FHIR Patient resource: https://www.hl7.org/fhir/patient.html
+//
+def Player_Patient(Player) {
+  id: $StrFmt("%d", Player.id)
+  birthDate: Convert_Date(Player.dateOfBirth)
+  gender: Convert_TerminologyCode(Player.gender, "GameBusGender", "Gender")
+  identifier[]: Build_Identifier("https://gamebus.eu/user#id", Player.user.id) // TODO: fix url
+  telecom[]: User_ContactPoint(Player.user)
+  name[]: User_HumanName(Player.user)
+  photo[]: Image_Attachment(Player.user.image)
+  communication[].language: Language_CodeableConcept(Player.user.language)
+  extension[]: User_Extension(Player.user)
+  extension[]: Membership_Extension(Player.memberships[])
+  extension[]: PlayerRole_Extension(Player.playerRole)
+  resourceType: "Patient"
+}
+
+// Description: Transform GameBus activity to proper FHIR resource
+//
+// Argument(s):
+//   Activity: GameBus activity message
+//
+// Output(s):
+//   FHIR resource: http://hl7.org/fhir/resourcelist.html
+//
+def Process_Activity(Activity) {
+  var resourceType: Convert_TerminologyCode(Activity.gameDescriptor.translationKey, "GameBusGameDescriptor", "Activity2Resource")
+  [] (if resourceType = "Observation"): Activity_Observation(Activity);
+  if resourceType = "Location" {
+    []: ActivityWithLocation_Observation(Activity);
+    []: Activity_Location(Activity);
+  }
+}
+
+// Description: Transform GameBus Activity to FHIR Observation resource
+//
+// Argument(s):
+//   Activity: GameBus Activity
+//
+// Output(s):
+//   FHIR Observation resource: https://www.hl7.org/fhir/observation.html
+//
+def Activity_Observation(Activity) {
+  resourceType: "Observation"
+  status: "final"
+  id: $StrFmt("%d", Activity.id)
+  effectiveInstant: Convert_Instant(Activity.date)
+  extension[]: Build_Extension("https://gamebus.eu/activity#isManual", "valueBoolean", Activity.isManual) // TODO: fix url
+  extension[]: Build_Extension("https://gamebus.eu/activity#group", "valueString", Activity.group) // TODO: fix url and check value type
+  extension[]: Build_Extension("https://gamebus.eu/activity#image", "valueAttachment", Image_Attachment(Activity.image)) // TODO: fix url and check value type
+
+  performer[]: Build_Reference($StrJoin("/", "Patient", Activity.creator.id), "", "Patient", $StrJoin(" ", Activity.creator.user.firstName, Activity.creator.user.lastName))
+  subject: Build_Reference($StrJoin("/", "Patient", Activity.player.id), "", "Patient", $StrJoin(" ", Activity.player.user.firstName, Activity.player.user.lastName))
+
+  code: Convert_Terminology(Activity.gameDescriptor.translationKey, "GameBusGameDescriptor", "ObservationCode")
+  category[]: Convert_Terminology(Activity.gameDescriptor.translationKey, "GameBusGameDescriptor", "ObservationCategory")
+  extension[]: Build_Extension("https://gamebus.eu/gameDescriptor#image", "valueUrl", Activity.gameDescriptor.image) // TODO: fix url
+  extension[]: Build_Extension("https://gamebus.eu/gameDescriptor#isAggregate", "valueBoolean", Activity.gameDescriptor.isAggregate) // TODO: fix url
+
+  var Device: DataProvider_Device(Activity.dataProvider)
+  device: Build_Reference("", Device.identifier, "Device", Device.deviceName[0].name)
+  extension[]: Build_Extension("https://gamebus.eu/dataProvider#image", "valueUrl", Activity.dataProvider.image) // TODO: fix url
+  extension[]: Build_Extension("https://gamebus.eu/dataProvider#isConnected", "valueBoolean", Activity.dataProvider.isConnected) // TODO: fix url
+
+  component[]: PropertyInstance_Component(Activity.propertyInstances[])
+}
+
+// Description: Transform GameBus Activity containing location to FHIR Observation resource
+//
+// Argument(s):
+//   Activity: GameBus Activity
+//
+// Output(s):
+//   FHIR Observation resource: https://www.hl7.org/fhir/observation.html
+//
+def ActivityWithLocation_Observation(Activity) {
+  $this: Activity_Observation(Activity)
+  focus[]: Build_Reference($StrJoin("/", "Location", Activity.id), "", "Location", "")
+}
+
+// Description: Transform GameBus Activity to FHIR Location resource
+//
+// Argument(s):
+//   Activity: GameBus Activity
+//
+// Output(s):
+//   FHIR Location resource: https://www.hl7.org/fhir/location.html
+//
+def Activity_Location(Activity) {
+  resourceType: "Location"
+  id: $StrFmt("%d", Activity.id)
+  var loc: $StrSplit(Activity.propertyInstances[1].value, ",")
+  var latitude: $StrSplit(loc[0], "(")
+  var longitude: $StrSplit(loc[1], ")")
+
+  position.longitude: $ParseFloat(longitude[0])
+  position.latitude: $ParseFloat(latitude[0])
+  // extension[]: Build_Extension(propertyInstance.id)
+}
