@@ -9,12 +9,13 @@ import com.sun.jna.Structure.FieldOrder;
  * This interface connects to Google Whistle mapping function implemented in C
  */
 public interface GWMapping extends Library {
-    GWMapping INSTANCE = Native.load(System.getProperty("user.dir") + "/src/main/c/google_whistle.so",
-            GWMapping.class);
+    GWMapping INSTANCE = Native.load("google_whistle", GWMapping.class);
 
     @FieldOrder({ "p", "n" })
     public class GoString extends Structure {
-        public static class ByValue extends GoString implements Structure.ByValue {}
+        public static class ByValue extends GoString implements Structure.ByValue {
+        }
+
         public String p;
         public long n;
     }
