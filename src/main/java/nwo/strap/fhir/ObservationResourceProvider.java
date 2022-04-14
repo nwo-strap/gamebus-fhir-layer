@@ -21,6 +21,7 @@ import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Offset;
 import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.annotation.Read;
+import ca.uhn.fhir.rest.annotation.RequiredParam;
 import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.annotation.Sort;
 import ca.uhn.fhir.rest.api.SortOrderEnum;
@@ -78,7 +79,7 @@ public class ObservationResourceProvider implements IResourceProvider {
 
     @Search
     public List<Observation> search(
-            @OptionalParam(name = Observation.SP_PATIENT) ReferenceParam thePatient,
+            @RequiredParam(name = Observation.SP_PATIENT) ReferenceParam thePatient,
             @OptionalParam(name = Observation.SP_DATE) DateRangeParam theDateRange,
             @OptionalParam(name = Observation.SP_CODE) TokenOrListParam theCodes,
             @Sort SortSpec theSort,
@@ -89,17 +90,10 @@ public class ObservationResourceProvider implements IResourceProvider {
         // TODO: to refactor this method to small pieces
         // Get Bearer token
         String authHeader = theRequestDetails.getHeader("Authorization");
-        String token = authHeader.substring("Bearer ".length());
 
         // Handle search parameters
         // Handle patient
-        String patientId = null;
-        if (thePatient != null) {
-            patientId = thePatient.getIdPart();
-        } else {
-            // auto specify patientId when Id is not provided
-            patientId = Config.getId(token);
-        }
+        String patientId = thePatient.getIdPart();
 
         // Handle date range
         String gbStart = null;
