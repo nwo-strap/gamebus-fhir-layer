@@ -3,6 +3,7 @@ package nwo.strap.fhir;
 import org.springframework.http.HttpStatus;
 
 import ca.uhn.fhir.rest.server.exceptions.AuthenticationException;
+import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -16,8 +17,17 @@ public class GamebusApiHandler {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
+    private static String getGBUrl() {
+        String gb = System.getProperty("gb.url");
+        if (gb == null) {
+            throw new InternalErrorException(
+                    "Not found property `gb.url`. Set GameBus endpoint when starting the server");
+        }
+        return gb;
+    }
+
     public static String get(String gamebusType, String id, String auth) {
-        String url = String.join("/", Config.getConfig("gb.url"), gamebusType, id);
+        String url = String.join("/", getGBUrl(), gamebusType, id);
         HttpResponse<String> r = Unirest.get(url)
                 .header("Authorization", auth)
                 .asString()
@@ -34,7 +44,7 @@ public class GamebusApiHandler {
     }
 
     public static String search(String searchParams, String id, String auth) {
-        String baseUrl = String.join("/", Config.getConfig("gb.url"), "players", id, "activities");
+        String baseUrl = String.join("/", getGBUrl(), "players", id, "activities");
         String searchUrl = baseUrl + "?" + searchParams;
         HttpResponse<String> r = Unirest.get(searchUrl)
                 .header("Authorization", auth)
