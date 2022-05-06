@@ -16,7 +16,7 @@ docker run -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
 when the server starts, it'll be served on http://localhost:8080. Check the next section [Usage](#Usage) to see how to send requests to the FHIR server.
 
 ## Usage
-To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or [httpie](https://httpie.io/).
+To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or [httpie](https://httpie.io/). Postman collections for testing GameBus-FHIR APIs is [available](https://github.com/nwo-strap/postman-collections). You could also do testing as described below.
 
 :bell: Request header `Authorization` is required and you must provide GameBus Bearer token to it when sending requests. See [GameBus guide](https://devdocs.gamebus.eu/#ok-fine-but-how-can-i-make-requests-from-outside-the-app) about how to obtain its token.
 
