@@ -5,5 +5,9 @@ if [ $# != 1 ]; then
     echo
     exit
 else
-    mvn -D="jna.library.path=/usr/local/lib" -Dgb.url=$1 jetty:run
+    mvn -D="jna.library.path=/usr/local/lib" \
+        -Dgb.url=$1 \
+        -Dgwc.player=/gamebus_fhir_r4/configurations/player.textproto \
+        -Dgwc.activity=/gamebus_fhir_r4/configurations/activity.textproto \
+        jetty:run
 fi
