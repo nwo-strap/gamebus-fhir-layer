@@ -11,9 +11,16 @@ The most convenient way to start a GameBus-FHIR server is to run it in container
 ```bash
 # TODO: replace IMAGE with a registered image
 # Note: you have to replace GAMEBUS_ENDPOINT with a real url
-docker run -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
+docker run -it -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
 ```
 when the server starts, it'll be served on http://localhost:8080. Check the next section [Usage](#Usage) to see how to send requests to the FHIR server.
+
+
+You could also use docker volume to store the [mapping_configs](https://github.com/nwo-strap/mapping_configs). When mounted to container, it will override the existing mapping configs in the image. This will allow you to update mapping configs even when the container is running. Start a server with volume:
+
+```
+docker run -it -v YOUR_VOLUME:/mapping_configs -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
+```
 
 ## Usage
 To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or [httpie](https://httpie.io/). Postman collections for testing GameBus-FHIR APIs is [available](https://github.com/nwo-strap/postman-collections). You could also do testing as described below.
@@ -44,26 +51,63 @@ To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.p
 
 
 
-## Guide for developers
+## Guide on development
 
 ### Setup development environment
 
 - [Java JDK](https://openjdk.java.net/) (≥17)
 - [Apache Maven](https://maven.apache.org/) (≥3.8)
 - Google Whistle shared object (see [Guide on building Google Whistle shared object](#Guide-on-building-Google-Whistle-shared-object))
+- [Mapping configs](https://github.com/nwo-strap/mapping_configs)
+    - You need to [update the `local_path` in `mapping_configs/gamebus_fhir_r4/configurations/*.textproto` files](https://github.com/nwo-strap/mapping_configs#41-update-the-local_path-in-gamebus_fhir_r4configurationstextproto-files)
 
 
-### Start server
+
+### Start local server
 
 To start a local testing GameBus-FHIR server, run the following command:
 
 ```bash
-# Note that you have to replace "GameBus-Endpoint" with a real URL
-mvn -D="jna.library.path=/usr/local/lib" -Dgb.url="GameBus-Endpoint" clean jetty:run
+# NB: You have to replace "GameBus-ENDPOINT" and "mapping_configs_ABSOLUTE_PATH" with real value
+
+mvn -D="jna.library.path=/usr/local/lib" \
+    -Dgb.url="GameBus-ENDPOINT" \
+    -Dgwc.player="mapping_configs_ABSOLUTE_PATH/gamebus_fhir_r4/configurations/player.textproto" \
+    -Dgwc.activity="mapping_configs_ABSOLUTE_PATH/gamebus_fhir_r4/configurations/activity.textproto" \
+    jetty:run
 ```
 
+## Guide on building docker image
 
-### Guide on building Google Whistle shared object
+### Requirements
+- [docker](https://docs.docker.com/engine/install/) (≥20.10.14)
+
+### Build image
+
+#### Use remote code from github repos
+
+```
+docker buildx build --no-cache=true -t gb-fhir-server .
+```
+it will automatically clone the code from the three repos
+- GW mapping engine https://github.com/nwo-strap/healthcare-data-harmonization
+- Mapping cnofigs https://github.com/nwo-strap/mapping_configs
+- GameBus-FHIR layer https://github.com/nwo-strap/gamebus-fhir-layer
+
+
+#### Use your local code
+```
+# it assumes you have cloned the three repos to a same place,
+# and you run the command below in the clone of this repo
+
+docker buildx build --no-cache=true -t gb-fhir-server \
+    --build-context gw-src=../healthcare-data-harmonization \
+    --build-context gw-config-src=../mapping_configs \
+    --build-context gamebus-fhir-src=. .
+```
+This way allows you build the image from locally updated code.
+
+## Guide on building Google Whistle shared object
 
 GameBus-FHIR layer use the shared object of Google Whistle mapping engine to conduct data mapping from GameBus structure to FHIR structure.
 
@@ -84,50 +128,6 @@ cd healthcare-data-harmonization/mapping_engine
 # and copy it to `/usr/local/lib` to be used by GameBus-FHIR layer
 ./build_exports.sh
 ```
-
-### Guide on developing GameBus-FHIR mapping configurations
-
-The GameBus-FHIR mapping configurations is located in [src/main/gamebus_fhir_r4](src/main/gamebus_fhir_r4), programmed with domain specific language, i.e. [Whistle Data Transformation Language](https://github.com/nwo-strap/healthcare-data-harmonization). This guide shows you how to develop new mapping configurations.
-
-#### 1. Build GW mapping engine by installing its dependencies and run `build_all.sh` (see [detail](https://github.com/nwo-strap/healthcare-data-harmonization#details))
-
-After building, the executable `GW_REPO_LOCAL_PATH/mapping_engine/main/main` should be generated.
-
-#### 2. Clone this repo
-
-```bash
-git clone https://github.com/nwo-strap/gamebus-fhir-layer.git
-```
-
-#### 3. Update mapping configurations in [src/main/gamebus_fhir_r4](src/main/gamebus_fhir_r4)
-
-Some important materials about Whistle Data Transformation Language
-
--   [Mini guide on language basics](https://github.com/nwo-strap/healthcare-data-harmonization/blob/master/mapping_language/doc/codelab.md)
--   [Language reference](https://github.com/nwo-strap/healthcare-data-harmonization/blob/master/mapping_language/doc/reference.md)
--   [Builtin functions](https://github.com/nwo-strap/healthcare-data-harmonization/blob/master/mapping_language/doc/builtins.md)
-
-Update the existing mapping configs or develop new mapping configs based on your needs.
-
-#### 4. Test mapping configs
-
-Instead of using this Gamebus-FHIR server to do testing, it's better to directly use GW engine to test the mapping configs.
-
-For example, try the following commands to convert GameBus player to [FHIR patient](https://www.hl7.org/fhir/patient.html):
-
-    cd THIS_REPO_LOCAL_PATH
-    GW_REPO_LOCAL_PATH/mapping_engine/main/main -input_file_spec=src/main/gamebus_fhir_r4/example/gb_player.json  -data_harmonization_config_file_spec=src/main/gamebus_fhir_r4/configurations/player.textproto -output_dir=.
-
-The output file is `./gb_player.output.json`.
-You can find the reference output files in `src/main/gamebus_fhir_r4/example/output`.
-
-A script is provided to test all examples:
-
-    bash src/main/gamebus_fhir_r4/util/run_mapping.sh GW_REPO_LOCAL_PATH/mapping_engine/main/main
-
-#### 5. Validate generated FHIR resources
-
-To make sure the mapping output conforms to FHIR specification, the [fhir-validator-app](https://github.com/inferno-framework/fhir-validator-app) or its [service](https://inferno.healthit.gov/validator/) can help you on validation.
 
 
 
