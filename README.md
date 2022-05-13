@@ -81,31 +81,50 @@ mvn -D="jna.library.path=/usr/local/lib" \
 
 ### Requirements
 - [docker](https://docs.docker.com/engine/install/) (≥20.10.14)
+    - Check [buildx](https://docs.docker.com/buildx/working-with-buildx/)(≥0.8) with `docker buildx`
 
 ### Build image
 
 #### Use remote code from github repos
 
 ```
-docker buildx build --no-cache=true -t gb-fhir-server .
+docker buildx build --no-cache=true -t gamebus-fhir-server \
+    --build-arg GITHUB_USERNAME=your_github_username \
+    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
+    .
 ```
-it will automatically clone the code from the three repos
+<!--- TODO: update here when repos become public. -->
+You have to provide your github username and [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token), due to some repos are private.
+
+The building will automatically clone the three repos below to the container
 - GW mapping engine https://github.com/nwo-strap/healthcare-data-harmonization
 - Mapping cnofigs https://github.com/nwo-strap/mapping_configs
 - GameBus-FHIR layer https://github.com/nwo-strap/gamebus-fhir-layer
 
-
+By default, the code from the latest commit of `main` or `master` branch of each repo will be used. To use code of other version, you could provide branch name, commit or tag name to following docker arguments:
+```
+docker buildx build --no-cache=true -t gamebus-fhir-server \
+    --build-arg GITHUB_USERNAME=your_github_username \
+    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
+    --build-arg GW_VERSION=gitBranch_orCommit_orTag \
+    --build-arg GW_CONFIG_VERSION=gitBranch_orCommit_orTag \
+    --build-arg GAMEBUS_FHIR_VERSION=gitBranch_orCommit_orTag \
+    .
+```
 #### Use your local code
 ```
-# it assumes you have cloned the three repos to a same place,
-# and you run the command below in the clone of this repo
+# it assumes you have cloned the three repos to the same place,
+# and you run the command below in the clone of this "gamebus-fhir-layer" repo
 
-docker buildx build --no-cache=true -t gb-fhir-server \
+docker buildx build --no-cache=true -t gamebus-fhir-server \
+    --build-arg GITHUB_USERNAME=your_github_username \
+    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
     --build-context gw-src=../healthcare-data-harmonization \
     --build-context gw-config-src=../mapping_configs \
-    --build-context gamebus-fhir-src=. .
+    --build-context gamebus-fhir-src=. \
+    .
 ```
-This way allows you build the image from locally updated code.
+In this way it allows you to build image from locally updated code.
 
 ## Guide on building Google Whistle shared object
 
