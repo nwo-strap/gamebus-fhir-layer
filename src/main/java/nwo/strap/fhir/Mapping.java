@@ -25,7 +25,7 @@ public class Mapping {
         in.n = in.p.length();
 
         GWMapping.GoString.ByValue conf = new GWMapping.GoString.ByValue();
-        conf.p = Config.getConfig(config);
+        conf.p = System.getProperty(config);
         conf.n = conf.p.length();
 
         GWMapping lib = GWMapping.INSTANCE;

@@ -37,9 +37,6 @@ public class SimpleRestfulServer extends RestfulServer {
         CorsInterceptor interceptor = new CorsInterceptor(config);
         registerInterceptor(interceptor);
 
-        // add authentication interceptor
-        registerInterceptor(new SecurityInterceptor());
-
         // Format the responses in nice HTML
         registerInterceptor(new ResponseHighlighterInterceptor());
     }
