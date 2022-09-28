@@ -7,9 +7,6 @@ FROM alpine as remote-data
 RUN apk add git
 WORKDIR /src
 
-ARG GITHUB_USERNAME
-ARG GITHUB_ACCESS_TOKEN
-
 # the version could be git branch, commit or tag
 ARG GW_VERSION=master
 ARG GW_CONFIG_VERSION=main
@@ -19,14 +16,10 @@ RUN set -eux && \
     git clone https://github.com/nwo-strap/healthcare-data-harmonization.git && \
         cd healthcare-data-harmonization && \
         git checkout $GW_VERSION && cd .. && \
-    # TODO: use public repo when applicable
-    # git clone https://github.com/nwo-strap/mapping_configs.git && \
-    git clone https://$GITHUB_USERNAME:$GITHUB_ACCESS_TOKEN@github.com/nwo-strap/mapping_configs.git && \
+    git clone https://github.com/nwo-strap/mapping_configs.git && \
         cd mapping_configs && \
         git checkout $GW_CONFIG_VERSION && cd .. && \
-    # TODO: use public repo when applicable
-    # git clone https://github.com/nwo-strap/gamebus-fhir-layer.git && \
-    git clone https://$GITHUB_USERNAME:$GITHUB_ACCESS_TOKEN@github.com/nwo-strap/gamebus-fhir-layer.git && \
+    git clone https://github.com/nwo-strap/gamebus-fhir-layer.git && \
         cd gamebus-fhir-layer && \
         git checkout $GAMEBUS_FHIR_VERSION
 
@@ -86,7 +79,7 @@ RUN set -eux && \
     apt-get install -y --no-install-recommends \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+    wget https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
     tar -C /usr/local -xzf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
     rm apache-maven-$MAVEN_VERSION-bin.tar.gz
 ENV PATH="/usr/local/apache-maven-$MAVEN_VERSION/bin:$PATH"
