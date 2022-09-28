@@ -1,31 +1,51 @@
 # GameBus-FHIR Layer
 
-This is a framework to enable GameBus to provide FHIR service.
-The framework is built on [HAPI FHIR plain server](https://hapifhir.io/hapi-fhir/docs/server_plain/introduction.html) and [Google Whistle mapping engine](https://github.com/GoogleCloudPlatform/healthcare-data-harmonization)(GW) with the following architecture:
+[![github license badge](https://img.shields.io/github/license/nwo-strap/gamebus-fhir-layer)](https://github.com/nwo-strap/gamebus-fhir-layer)
+![Docker Pulls](https://img.shields.io/docker/pulls/nlesc/gamebus-fhir-layer)
+
+
+This is a framework to enable [GameBus](https://blog.gamebus.eu/) to provide [FHIR](http://hl7.org/fhir/) service.
+
+The framework is built on [HAPI FHIR plain server](https://hapifhir.io/hapi-fhir/docs/server_plain/introduction.html) and [Google Whistle mapping engine](https://github.com/GoogleCloudPlatform/healthcare-data-harmonization)(GW) with the following architecture.
 
 ![GB](image/gb_fhir_layer.png)
+
+
+## Requirements
+
+This framework is a wrapper on GameBus platform. To run and try it, first you need to
+- get an account on GameBus, sign-up [here](https://app3.gamebus.eu/auth/signup)
+- add some test data of activities through GameBus app, e.g. walk, run, bike
+
+For more info, see GameBus [tutorial](https://devdocs.gamebus.eu/get-started/).
+
+Mac with Apple silicon is not supported at the moment.
 
 ## Start the server
 The most convenient way to start a GameBus-FHIR server is to run it in container with [docker](https://www.docker.com/),
 
 ```bash
-# TODO: replace IMAGE with a registered image
-# Note: you have to replace GAMEBUS_ENDPOINT with a real url
-docker run -it -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
-```
-when the server starts, it'll be served on http://localhost:8080. Check the next section [Usage](#Usage) to see how to send requests to the FHIR server.
-
-
-You could also use docker volume to store the [mapping_configs](https://github.com/nwo-strap/mapping_configs). When mounted to container, it will override the existing mapping configs in the image. This will allow you to update mapping configs even when the container is running. Start a server with volume:
-
-```
-docker run -it -v YOUR_VOLUME:/mapping_configs -p 8080:8080 IMAGE start_fhir_server GAMEBUS_ENDPOINT
+docker run -it -p 8080:8080 nlesc/gamebus-fhir-layer start_fhir_server GAMEBUS_API_URL
+# You need to replace `GAMEBUS_API_URL` with https://api3.gamebus.eu/v2
+# to get the latest API url, check https://devdocs.gamebus.eu/assets/GameBus.test.postman_environment.json
 ```
 
-## Usage
-To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or [httpie](https://httpie.io/). Postman collections for testing GameBus-FHIR APIs is [available](https://github.com/nwo-strap/postman-collections). You could also do testing as described below.
+when the server starts, it'll be served on http://localhost:8080. Check the next section [Usage](#Usage) to see how to send requests to FHIR server.
 
-:bell: Request header `Authorization` is required and you must provide GameBus Bearer token to it when sending requests. See [GameBus guide](https://devdocs.gamebus.eu/#ok-fine-but-how-can-i-make-requests-from-outside-the-app) about how to obtain its token.
+### Use your own mapping configs
+You could use docker volume to mount your own [mapping_configs](https://github.com/nwo-strap/mapping_configs) to container, and it will override the existing mapping configs in the image. This will allow you to update mapping configs even when the container is running. Start a server with volume:
+
+```
+docker run -it -v YOUR_VOLUME:/mapping_configs -p 8080:8080 nlesc/gamebus-fhir-layer start_fhir_server GAMEBUS_API_URL
+```
+
+## Usage & test
+To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.postman.com/), [Hoppscotch](https://hoppscotch.io/), or [httpie](https://httpie.io/).
+
+Postman collections for testing GameBus-FHIR APIs is in the repo [postman-collections](https://github.com/nwo-strap/postman-collections).
+
+
+:bell: Request header `Authorization` is required and you must provide GameBus Bearer token to it when sending requests. See [GameBus guide](https://devdocs.gamebus.eu/get-started/) about how to obtain its token.
 
 -   Test that your server is running by fetching its FHIR `CapabilityStatement`:
 
@@ -50,6 +70,45 @@ To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.p
     You could find available search parameters in the `CapabilityStatement`.
 
 
+## Guide on building docker image
+
+### Requirements
+- [docker](https://docs.docker.com/engine/install/) (≥20.10.14)
+    - Check [buildx](https://docs.docker.com/buildx/working-with-buildx/)(≥0.8) with `docker buildx`
+
+### Build image
+
+#### Use remote code from github repos
+
+```
+docker buildx build --no-cache=true -t gamebus-fhir-layer .
+```
+The building will automatically clone the three repos below to the container
+- GW mapping engine https://github.com/nwo-strap/healthcare-data-harmonization
+- Mapping cnofigs https://github.com/nwo-strap/mapping_configs
+- GameBus-FHIR layer https://github.com/nwo-strap/gamebus-fhir-layer
+
+By default, the code from the latest commit of `main` or `master` branch of each repo will be used. To use code of other version, you could provide branch name, commit or tag name to following docker arguments:
+```
+docker buildx build --no-cache=true -t gamebus-fhir-server \
+    --build-arg GW_VERSION=gitBranch_orCommit_orTag \
+    --build-arg GW_CONFIG_VERSION=gitBranch_orCommit_orTag \
+    --build-arg GAMEBUS_FHIR_VERSION=gitBranch_orCommit_orTag \
+    .
+```
+#### Use your local code
+```
+# it assumes you have cloned the three repos to the same place,
+# and you run the command below in the clone of "gamebus-fhir-layer" repo
+
+docker buildx build --no-cache=true -t gamebus-fhir-layer \
+    --build-context gw-src=../healthcare-data-harmonization \
+    --build-context gw-config-src=../mapping_configs \
+    --build-context gamebus-fhir-src=. \
+    .
+```
+In this way it allows you to update code locally and build image from it.
+
 
 ## Guide on development
 
@@ -63,68 +122,19 @@ To use FHIR APIs, we recommend using an API client, e.g. [Postman](https://www.p
 
 
 
-### Start local server
+### Start local Java server
 
-To start a local testing GameBus-FHIR server, run the following command:
+To start a local Java server, run the following command:
 
 ```bash
-# NB: You have to replace "GameBus-ENDPOINT" and "mapping_configs_ABSOLUTE_PATH" with real value
+# NB: You have to replace "GAMEBUS_API_URL" and "mapping_configs_ABSOLUTE_PATH" with real values
 
 mvn -D="jna.library.path=/usr/local/lib" \
-    -Dgb.url="GameBus-ENDPOINT" \
+    -Dgb.url="GAMEBUS_API_URL" \
     -Dgwc.player="mapping_configs_ABSOLUTE_PATH/gamebus_fhir_r4/configurations/player.textproto" \
     -Dgwc.activity="mapping_configs_ABSOLUTE_PATH/gamebus_fhir_r4/configurations/activity.textproto" \
     jetty:run
 ```
-
-## Guide on building docker image
-
-### Requirements
-- [docker](https://docs.docker.com/engine/install/) (≥20.10.14)
-    - Check [buildx](https://docs.docker.com/buildx/working-with-buildx/)(≥0.8) with `docker buildx`
-
-### Build image
-
-#### Use remote code from github repos
-
-```
-docker buildx build --no-cache=true -t gamebus-fhir-server \
-    --build-arg GITHUB_USERNAME=your_github_username \
-    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
-    .
-```
-<!--- TODO: update here when repos become public. -->
-You have to provide your github username and [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token), due to some repos are private.
-
-The building will automatically clone the three repos below to the container
-- GW mapping engine https://github.com/nwo-strap/healthcare-data-harmonization
-- Mapping cnofigs https://github.com/nwo-strap/mapping_configs
-- GameBus-FHIR layer https://github.com/nwo-strap/gamebus-fhir-layer
-
-By default, the code from the latest commit of `main` or `master` branch of each repo will be used. To use code of other version, you could provide branch name, commit or tag name to following docker arguments:
-```
-docker buildx build --no-cache=true -t gamebus-fhir-server \
-    --build-arg GITHUB_USERNAME=your_github_username \
-    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
-    --build-arg GW_VERSION=gitBranch_orCommit_orTag \
-    --build-arg GW_CONFIG_VERSION=gitBranch_orCommit_orTag \
-    --build-arg GAMEBUS_FHIR_VERSION=gitBranch_orCommit_orTag \
-    .
-```
-#### Use your local code
-```
-# it assumes you have cloned the three repos to the same place,
-# and you run the command below in the clone of this "gamebus-fhir-layer" repo
-
-docker buildx build --no-cache=true -t gamebus-fhir-server \
-    --build-arg GITHUB_USERNAME=your_github_username \
-    --build-arg GITHUB_ACCESS_TOKEN=your_github_personal_access_token \
-    --build-context gw-src=../healthcare-data-harmonization \
-    --build-context gw-config-src=../mapping_configs \
-    --build-context gamebus-fhir-src=. \
-    .
-```
-In this way it allows you to build image from locally updated code.
 
 ## Guide on building Google Whistle shared object
 
@@ -144,10 +154,9 @@ cd healthcare-data-harmonization/mapping_engine
 
 # Build shared lib
 # The script will generate `libgoogle_whistle.so`(for Linux) or `libgoogle_whistle.dylib`(for MacOS)
-# and copy it to `/usr/local/lib` to be used by GameBus-FHIR layer
+# and create corresponding symbolic link in `/usr/local/lib`, which will be used by GameBus-FHIR layer
 ./build_exports.sh
 ```
-
 
 
 ## Issues and Contributing

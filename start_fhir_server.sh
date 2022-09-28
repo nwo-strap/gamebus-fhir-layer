@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# != 1 ]; then
-    echo "Usage: $0 GameBus_Endpoint"
+    echo "Usage: $0 GameBus_API_URL"
     echo
     exit
 else
