@@ -1,7 +1,7 @@
 # GameBus-FHIR Layer
 
 [![github license badge](https://img.shields.io/github/license/nwo-strap/gamebus-fhir-layer)](https://github.com/nwo-strap/gamebus-fhir-layer)
-![Docker Pulls](https://img.shields.io/docker/pulls/nlesc/gamebus-fhir-layer)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nlesc/gamebus-fhir-layer)](https://hub.docker.com/repository/docker/nlesc/gamebus-fhir-layer)
 
 
 This is a framework to enable [GameBus](https://blog.gamebus.eu/) to provide [FHIR](http://hl7.org/fhir/) service.
