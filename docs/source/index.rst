@@ -18,7 +18,7 @@ same language. Here, the “language” for exchanging healthcare info is FHIR.
 
 `FHIR`_ (Fast Healthcare Interoperability Resources) is a standard for exchanging
 healthcare information electronically. It describes healthcare data formats and
-elements and API. FHIR has been more and more wildely used in industry and
+elements and API. FHIR has been more and more widely used in industry and
 academia, becoming the de-facto standard.
 
 To enable FHIR service for GameBus without changing or replacing GameBus
