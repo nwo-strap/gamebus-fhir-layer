@@ -2,23 +2,23 @@ Request on FHIR API
 ===================
 
 After :ref:`starting FHIR server<tutorial2_docker_run:start fhir server>` and
-:ref:`adding data to GameBus platform<tutorial3_gamebus:add data mannualy>` in
+:ref:`adding data to GameBus platform<tutorial3_gamebus:add data manually>` in
 previous sections, now it's ready to try the service of GameBus FHIR layer.
 
 The FHIR layer is a service layer on GameBus platform, providing FHIR REST API
-for communicating FHIR compliant data with outside. For example, when user sends
-a HTTP GET request to FHIR REST API, FHIR layer will transform this request and
+for communicating FHIR-compliant data with outside. For example, when a user sends
+an HTTP GET request to FHIR REST API, the FHIR layer will transform this request and
 forward the transformed request to GameBus's API; GameBus will process the request,
-e.g. reading requested data from its database, and return the relevant data in
-GameBus format to FHIR layer; FHIR layer will then transform the GameBus data to
-data in FHIR compliant format, and then return the FHIR data to user as a HTTP
+e.g. reading requested data from its database, and then return the relevant data in
+GameBus format to the FHIR layer; the FHIR layer will then transform the GameBus data to
+data in FHIR-compliant format, and then return the FHIR data to user as a HTTP
 response. That is how FHIR layer works and how it enables GameBus to provide FHIR
 service.
 
-To try and test FHIR API, we need API clients to help sending HTTP requests.
+To try and test FHIR API, we need API clients to help send HTTP requests.
 Various API clients exist, e.g. `httpie`_, `Postman`_ and `Hoppscotch`_.
 
-In this tutorial, we will use Hoppscotch. It's a web based API client.
+In this tutorial, we will use Hoppscotch. It's a web-based API client.
 Open its website(https://hoppscotch.io/) in a browser, then you can start
 sending HTTP requests.
 
@@ -26,12 +26,12 @@ sending HTTP requests.
 Check the capability of FHIR server
 -----------------------------------
 
-We can check the capability of the FHIR server by sending request to
+We can check the capability of the FHIR server by sending a request to
 :code:`[base]/metadata` API. We started the server of FHIR layer locally, so
 :code:`[base]` here is :code:`localhost:8080`.
 
-Open Hoppscotch website (https://hoppscotch.io/), check the screenshot below and
-do the following steps:
+Open Hoppscotch website (https://hoppscotch.io/), check the screenshot below,
+and do the following steps:
 
 1. Use HTTP method :code:`GET`
 2. Fill URL box with :code:`http://localhost:8080/metadata`
@@ -42,17 +42,17 @@ do the following steps:
   :width: 500
 
 The response is FHIR `CapabilityStatement`_ resource, which describes the
-available FHIR resources, operations and functionalities on this FHIR server.
+available FHIR resources, operations, and functionalities on this FHIR server.
 
 Check the resource body to see what FHIR resources and interactions are
-supported by current FHIR layer.
+supported by the current FHIR layer.
 
 
 Read FHIR resources
 -------------------
 
 This part will show how to read FHIR `Patient`_ and `Observation`_ resources.
-GameBus token, player id and activity id will be required to send HTTP requests,
+GameBus token, player id, and activity id will be required to send HTTP requests,
 check :ref:`GameBus section <tutorial3_gamebus:Get activity id>` to
 get them.
 
@@ -69,7 +69,7 @@ Check the screenshot below and follow the steps:
    replace :code:`[pid]` with your player id.
 2. Click `Authorization` button
 3. Select authorization type :code:`Bearer`
-4. Fill in token box with your GameBus token
+4. Fill in the token box with your GameBus token
 5. Send the request
 
 .. image:: image/fhir_api_patient.png
@@ -78,7 +78,7 @@ Check the screenshot below and follow the steps:
 The response is FHIR `Patient`_ resource, which is transformed from the
 player data of GameBus by the FHIR server.
 
-Check the detail of response body to see if the information is consistent with
+Check the detail of the response body to see if the information is consistent with
 what you provided to GameBus when creating an account, e.g. first name, last
 name and email.
 
@@ -86,8 +86,8 @@ name and email.
 Read FHIR Observation resource
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some activity data (e.g. walk) were added to GameBus in previous section. These
-activities will be mapped to FHIR `Observation`_ resource by FHIR layer.
+Some activity data (e.g. walk) were added to GameBus in the previous section. These
+activities will be mapped to FHIR `Observation`_ resource by the FHIR layer.
 
 To request the FHIR Observation data, the activity id is required, e.g. the id
 of walk activity. Check :ref:`previous section<tutorial3_gamebus:Get activity id>`
@@ -104,21 +104,21 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_observation.png
   :width: 500
 
-The response is FHIR `Observation`_ resource. Check the detail of response body
+The response is FHIR `Observation`_ resource. Check the detail of the response body
 to see if the information is consistent with the activity data you added to GameBus.
 
 
 Search FHIR Observation resources
 ---------------------------------
 
-Besides requesting FHIR observation with specific id, FHIR layer also supports
+Besides requesting FHIR observation with a specific id, FHIR layer also supports
 searching based on e.g. observation type and/or date. To get the full list of
 supported search parameters, you can check the :code:`CapabilityStatement` data
 in the :ref:`section above<tutorial4_fhir_api:check the capability of fhir server>`.
 
 
-Search specific type of observations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Search specific types of observations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As an example, here we'd like to search all observations related to walk activity.
 
@@ -132,14 +132,14 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_search.png
   :width: 500
 
-The response is FHIR `Bundle`_ resource, it's a blundle of requested walk
-activities (FHIR Observation data) with full url to each observation.
+The response is FHIR `Bundle`_ resource, it's a bundle of requested walk
+activities (FHIR Observation data) with full URL to each observation.
 
 
 Try other search parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Observation also support other search parameters besides :code:`code`.
+Observation supports other search parameters besides :code:`code`.
 
 Here are some examples you could try:
 
@@ -150,7 +150,7 @@ Here are some examples you could try:
    * - Request URL
      - Comment
    * - http://localhost:8080/Observation?patient=[pid]&code=walk,run,bike
-     - search all observations related to walk, run and bike activites
+     - search all observations related to walk, run and bike activities
    * - http://localhost:8080/Observation?patient=[pid]&date=gt2022-12-01
      - search all observations created after 1st December, 2022
    * - http://localhost:8080/Observation?patient=[pid]&code=walk&date=gt2022-12-01
@@ -165,7 +165,7 @@ Here are some examples you could try:
 
 ⚠️ Note that the search parameter :code:`patient` is always required to specify
 which patient (GameBus player) to query. When changing the patient (i.e. player id),
-you also need to change the token to the one assoicated with that patient (GameBus player).
+you also need to change the token to the one associated with that patient (GameBus player).
 
 
 Useful links
@@ -173,7 +173,7 @@ Useful links
 
 👉 Here is a `cheat sheet`_ for FHIR REST APIs.
 
-👉 For detailed explanation of all FHIR APIs and search parameters, please check `FHIR specification`_.
+👉 For a detailed explanation of all FHIR APIs and search parameters, please check `FHIR specification`_.
 
 
 .. _httpie: https://httpie.io/
