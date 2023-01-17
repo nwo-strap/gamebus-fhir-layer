@@ -1,8 +1,8 @@
 FHIR for GameBus
 ================
 
-`GameBus`_ is a digital platform for people playing together healthy social,
-cognitive, and physical activities in a personalized gaming experience.
+`GameBus`_ is a digital platform where you can, together with your family, friends
+or team, play healthy social, cognitive, and physical games in a personalized gaming experience.
 Like many other healthcare platforms, GameBus has its in-house schema to
 represent data and offers specific REST API to share these data.
 This way, however, causes serious barriers to exchange data between platforms
