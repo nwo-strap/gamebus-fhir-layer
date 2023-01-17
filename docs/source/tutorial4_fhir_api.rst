@@ -15,7 +15,7 @@ data in FHIR-compliant format, and then return the FHIR data to user as a HTTP
 response. That is how FHIR layer works and how it enables GameBus to provide FHIR
 service.
 
-To try and test FHIR API, we need API clients to help send HTTP requests.
+To try and test the FHIR API, we need API clients to help send HTTP requests.
 Various API clients exist, e.g. `httpie`_, `Postman`_ and `Hoppscotch`_.
 
 In this tutorial, we will use Hoppscotch. It's a web-based API client.
