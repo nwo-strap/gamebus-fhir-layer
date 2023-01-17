@@ -75,7 +75,7 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_patient.png
   :width: 500
 
-The response is FHIR `Patient`_ resource, which is transformed from the
+The response is a FHIR `Patient`_ resource, which is transformed from the
 player data of GameBus by the FHIR server.
 
 Check the detail of the response body to see if the information is consistent with
