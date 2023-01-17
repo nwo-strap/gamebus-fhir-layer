@@ -111,7 +111,7 @@ to see if the information is consistent with the activity data you added to Game
 Search FHIR Observation resources
 ---------------------------------
 
-Besides requesting FHIR observation with a specific id, FHIR layer also supports
+Besides requesting FHIR observations with a specific id, FHIR layer also supports
 searching based on e.g. observation type and/or date. To get the full list of
 supported search parameters, you can check the :code:`CapabilityStatement` data
 in the :ref:`section above<tutorial4_fhir_api:check the capability of fhir server>`.
