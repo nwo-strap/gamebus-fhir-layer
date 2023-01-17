@@ -32,7 +32,7 @@ account on GameBus platform and add some test data to GameBus for us to request
 later using FHIR REST API, for details see the next section.
 
 
-.. _open-sourced: https://github.com/nwo-strap/gamebus-fhir-layer
+.. _open-source: https://github.com/nwo-strap/gamebus-fhir-layer
 .. _Docker image: https://hub.Docker.com/repository/Docker/nlesc/gamebus-fhir-layer
 .. _how to install Docker: https://docs.docker.com/get-docker/
 .. _Docker's doc: https://docs.Docker.com/engine/reference/commandline/run/
