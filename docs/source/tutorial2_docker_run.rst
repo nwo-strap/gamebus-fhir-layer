@@ -1,7 +1,7 @@
 Start FHIR server
 =================
 
-GameBus FHIR layer is `open-sourced`_ and available as a `Docker image`_
+GameBus FHIR layer is `open-source`_ and available as a `Docker image`_
 (id: :code:`nlesc/gamebus-fhir-layer`). The most convenient way to deploy or run
 it is using Docker.
 
