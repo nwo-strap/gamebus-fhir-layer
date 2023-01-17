@@ -104,7 +104,7 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_observation.png
   :width: 500
 
-The response is FHIR `Observation`_ resource. Check the detail of the response body
+The response is a FHIR `Observation`_ resource. Check the detail of the response body
 to see if the information is consistent with the activity data you added to GameBus.
 
 
