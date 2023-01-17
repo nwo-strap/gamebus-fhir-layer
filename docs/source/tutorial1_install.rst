@@ -1,7 +1,7 @@
 Requirements
 ============
 
-Hardware
+Note for Mac users
 --------
 
 Mac with Apple silicon (e.g. M1, M2 cpu) is not supported

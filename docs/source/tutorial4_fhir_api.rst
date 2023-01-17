@@ -5,18 +5,18 @@ After :ref:`starting FHIR server<tutorial2_docker_run:start fhir server>` and
 :ref:`adding data to GameBus platform<tutorial3_gamebus:add data manually>` in
 previous sections, now it's ready to try the service of GameBus FHIR layer.
 
-The FHIR layer is a service layer on GameBus platform, providing FHIR REST API
-for communicating FHIR-compliant data with outside. For example, when a user sends
+The FHIR layer is a service layer on top of the GameBus platform, providing the FHIR REST API
+for communicating FHIR-compliant data with the outside. For example, when a user sends
 an HTTP GET request to FHIR REST API, the FHIR layer will transform this request and
 forward the transformed request to GameBus's API; GameBus will process the request,
-e.g. reading requested data from its database, and then return the relevant data in
+e.g. read the requested data from its database, and then return the relevant data in
 GameBus format to the FHIR layer; the FHIR layer will then transform the GameBus data to
 data in FHIR-compliant format, and then return the FHIR data to user as a HTTP
-response. That is how FHIR layer works and how it enables GameBus to provide FHIR
+response. That is how the FHIR layer works and how it enables GameBus to provide FHIR
 service.
 
-To try and test FHIR API, we need API clients to help send HTTP requests.
-Various API clients exist, e.g. `httpie`_, `curl`_, `Postman`_ and `Hoppscotch`_.
+To try and test the FHIR API, we need API clients to help send HTTP requests.
+Various API clients exist, e.g. `httpie`_, `Postman`_ and `Hoppscotch`_.
 
 In this tutorial, we will use Hoppscotch. It's a web-based API client.
 Open its website(https://hoppscotch.io/) in a browser, then you can start
@@ -75,7 +75,7 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_patient.png
   :width: 500
 
-The response is FHIR `Patient`_ resource, which is transformed from the
+The response is a FHIR `Patient`_ resource, which is transformed from the
 player data of GameBus by the FHIR server.
 
 Check the detail of the response body to see if the information is consistent with
@@ -104,14 +104,14 @@ Check the screenshot below and follow the steps:
 .. image:: image/fhir_api_observation.png
   :width: 500
 
-The response is FHIR `Observation`_ resource. Check the detail of the response body
+The response is a FHIR `Observation`_ resource. Check the detail of the response body
 to see if the information is consistent with the activity data you added to GameBus.
 
 
 Search FHIR Observation resources
 ---------------------------------
 
-Besides requesting FHIR observation with a specific id, FHIR layer also supports
+Besides requesting FHIR observations with a specific id, FHIR layer also supports
 searching based on e.g. observation type and/or date. To get the full list of
 supported search parameters, you can check the :code:`CapabilityStatement` data
 in the :ref:`section above<tutorial4_fhir_api:check the capability of fhir server>`.
