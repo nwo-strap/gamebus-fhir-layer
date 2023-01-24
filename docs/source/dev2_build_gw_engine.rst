@@ -55,7 +55,7 @@ is a forked codebase and updated with three new scripts:
    This Go file can be updated to add other export functions.
 
 - `Dockerfile`_
-   It's Doclerfile to a build docker image of the mapping engine.
+  The dockerfile to build a docker image of the mapping engine.
 
 
 .. _Google Whistle (GW): https://github.com/nwo-strap/healthcare-data-harmonization
