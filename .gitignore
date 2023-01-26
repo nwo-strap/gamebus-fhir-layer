@@ -1,2 +1,5 @@
 target
 src/main/resources/config.properties
+
+.vscode
+.DS_Store
