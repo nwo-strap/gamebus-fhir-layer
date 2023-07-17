@@ -16,7 +16,7 @@ response. That is how the FHIR layer works and how it enables GameBus to provide
 service.
 
 To try and test the FHIR API, we need API clients to help send HTTP requests.
-Various API clients exist, e.g. `httpie`_, `Postman`_ and `Hoppscotch`_.
+Various API clients exist, e.g. `httpie`_, `Postman`_, `Hoppscotch`_ and `Insomnia`_.
 
 In this tutorial, we will use Hoppscotch. It's a web-based API client.
 Open its website(https://hoppscotch.io/) in a browser, then you can start
@@ -179,6 +179,7 @@ Useful links
 .. _httpie: https://httpie.io/
 .. _Postman: https://www.postman.com/
 .. _Hoppscotch: https://hoppscotch.io/
+.. _Insomnia: https://insomnia.rest/
 .. _CapabilityStatement: https://www.hl7.org/fhir/capabilitystatement.html
 .. _Patient: https://www.hl7.org/fhir/patient.html
 .. _Observation: https://www.hl7.org/fhir/observation.html
