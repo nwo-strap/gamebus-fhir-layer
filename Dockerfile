@@ -3,8 +3,9 @@
 #------------------------------------------------------------------------------
 # Create a build stage with remote data
 #------------------------------------------------------------------------------
-FROM alpine as remote-data
-RUN apk add git
+FROM alpine AS remote-data
+RUN apk add git && \
+    rm -rf /var/cache/apk/*
 WORKDIR /src
 
 # the version could be git branch, commit or tag
@@ -15,13 +16,13 @@ ARG GAMEBUS_FHIR_VERSION=main
 RUN set -eux && \
     git clone https://github.com/nwo-strap/healthcare-data-harmonization.git && \
         cd healthcare-data-harmonization && \
-        git checkout $GW_VERSION && cd .. && \
+        git checkout ${GW_VERSION} && cd .. && \
     git clone https://github.com/nwo-strap/mapping_configs.git && \
         cd mapping_configs && \
-        git checkout $GW_CONFIG_VERSION && cd .. && \
+        git checkout ${GW_CONFIG_VERSION} && cd .. && \
     git clone https://github.com/nwo-strap/gamebus-fhir-layer.git && \
         cd gamebus-fhir-layer && \
-        git checkout $GAMEBUS_FHIR_VERSION
+        git checkout ${GAMEBUS_FHIR_VERSION}
 
 #------------------------------------------------------------------------------
 # Create helper stages
@@ -39,7 +40,7 @@ COPY --from=remote-data /src/gamebus-fhir-layer /
 #------------------------------------------------------------------------------
 # Build the shared object of Google Whistle mapping engine
 #------------------------------------------------------------------------------
-FROM openjdk:18-slim-bullseye AS gw-build
+FROM openjdk:23-slim-bullseye AS gw-build
 
 RUN set -eux && \
     apt-get update && \
@@ -49,13 +50,38 @@ RUN set -eux && \
         git \
         unzip \
         wget && \
-    # install Go and protoc
-    wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
-    wget https://github.com/protocolbuffers/protobuf/releases/download/v3.20.1/protoc-3.20.1-linux-x86_64.zip && \
-    mkdir /usr/local/protoc && \
-    unzip protoc-3.20.1-linux-x86_64.zip -d /usr/local/protoc
+    apt-get clean
+
+# Set ARGs for Go version, Protoc version, and the target architectures
+ARG GO_VERSION=1.18.1
+ARG PROTOC_VERSION=3.20.1
+ARG TARGETARCH
+
+# Download and install Go and protoc based on the architecture
+RUN case "${TARGETARCH}" in \
+    'amd64') \
+      GOARCH='amd64' \
+      PROTOC_ARCH='linux-x86_64' \
+      ;; \
+    'arm64') \
+      GOARCH='arm64' \
+      PROTOC_ARCH='linux-aarch_64' \
+      ;; \
+    *) echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
+    esac && \
+    # install Go
+    wget "https://golang.org/dl/go${GO_VERSION}.linux-${GOARCH}.tar.gz" && \
+    tar -C /usr/local -xzf "go${GO_VERSION}.linux-${GOARCH}.tar.gz" && \
+    rm "go${GO_VERSION}.linux-${GOARCH}.tar.gz" && \
+    # install protoc
+    wget "https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-${PROTOC_ARCH}.zip" && \
+    unzip protoc-${PROTOC_VERSION}-${PROTOC_ARCH}.zip -d /usr/local/protoc && \
+    rm protoc-${PROTOC_VERSION}-${PROTOC_ARCH}.zip
+
 ENV PATH="$PATH:/usr/local/go/bin:/usr/local/protoc/bin"
+
+# ================================================================================================
+
 
 WORKDIR /healthcare-data-harmonization
 RUN --mount=target=.,from=gw-src,rw \
@@ -66,22 +92,22 @@ RUN --mount=target=.,from=gw-src,rw \
 #------------------------------------------------------------------------------
 # Build the target image of GameBus-FHIR layer
 #------------------------------------------------------------------------------
-FROM openjdk:18-slim-bullseye
+FROM openjdk:23-slim-bullseye
 
 # from build stages copy Google Whistle shared object and config files to specific paths
 COPY --from=gw-build  /usr/local/lib/libgoogle_whistle.* /usr/local/lib
 COPY --from=gw-config-src . /mapping_configs
 
 # install maven
-ENV MAVEN_VERSION=3.8.5
+ARG MAVEN_VERSION=3.8.5
 RUN set -eux && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-    tar -C /usr/local -xzf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-    rm apache-maven-$MAVEN_VERSION-bin.tar.gz
+    wget https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    tar -C /usr/local -xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
 ENV PATH="/usr/local/apache-maven-$MAVEN_VERSION/bin:$PATH"
 
 # from build stage copy GameBus-FHIR layer code
