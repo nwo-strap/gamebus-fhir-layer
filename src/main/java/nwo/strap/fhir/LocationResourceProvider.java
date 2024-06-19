@@ -10,8 +10,9 @@ import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Read;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.server.IResourceProvider;
-import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
+import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 
 public class LocationResourceProvider implements IResourceProvider {
 
@@ -26,28 +27,38 @@ public class LocationResourceProvider implements IResourceProvider {
         // Request GameBus Activity
         String res = GamebusApiHandler.get("activities", theId.getIdPart(), authHeader);
 
-        // Run mapping using Google Whistle
-        String resourcesStr = Mapping.run(res, "gwc.activity");
-        if (!resourcesStr.startsWith("[")) {
-            throw new ResourceNotFoundException(
-                    "Invalid mapped data. NOT YET support to map the corresponding"
-                            + " GameBus activity to FHIR Location");
-        }
+        // Get the activity name
+        JSONObject resJSON = new JSONObject(res);
+        JSONObject gameDescriptor = resJSON.getJSONObject("gameDescriptor");
+        String translationKey = gameDescriptor.getString("translationKey");
 
-        // Run filtering
-        JSONArray resources = new JSONArray(resourcesStr);
-        IParser parser = theRequestDetails.getFhirContext().newJsonParser();
-        Location output = null;
-        for (Object resource : resources) {
-            try {
-                output = parser.parseResource(Location.class, resource.toString());
-            } catch (DataFormatException e) {
-                // ignore the exception, filter out undesired resources
+        try {
+            // Run mapping using Google Whistle
+            String resourcesStr = Mapping.run(res, "gwc.activity");
+
+            if (!resourcesStr.startsWith("[")) {
+                String errorMessage = String.format("GameBus gameDescriptor %s (%s) is NOT supported yet.", translationKey, theId.getIdPart());
+                throw new NotImplementedOperationException(errorMessage);
             }
-            if (output != null) {
-                break;
+
+            // Run filtering
+            JSONArray resources = new JSONArray(resourcesStr);
+            IParser parser = theRequestDetails.getFhirContext().newJsonParser();
+            Location output = null;
+            for (Object resource : resources) {
+                try {
+                    output = parser.parseResource(Location.class, resource.toString());
+                } catch (DataFormatException e) {
+                    // ignore the exception, filter out undesired resources
+                }
+                if (output != null) {
+                    break;
+                }
             }
+            return output;
+        } catch (MappingException e) {
+            String errorMessage = String.format("Failed to map GameBus gameDescriptor %s (%s): %s", translationKey, theId.getIdPart(), e);
+            throw new NotImplementedOperationException(errorMessage);
         }
-        return output;
     }
 }

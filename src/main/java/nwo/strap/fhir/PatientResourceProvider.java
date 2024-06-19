@@ -9,6 +9,7 @@ import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Read;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.server.IResourceProvider;
+import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 
 public class PatientResourceProvider implements IResourceProvider {
 
@@ -23,13 +24,18 @@ public class PatientResourceProvider implements IResourceProvider {
         // Request GameBus player
         String res = GamebusApiHandler.get("players", theId.getIdPart(), authHeader);
 
-        // Run the mapping using Google Whistle
-        String output = Mapping.run(res, "gwc.player");
+        try {
+            // Run the mapping using Google Whistle
+            String output = Mapping.run(res, "gwc.player");
 
-        // Create patient
-        IParser parser = theRequestDetails.getFhirContext().newJsonParser();
+            // Create patient
+            IParser parser = theRequestDetails.getFhirContext().newJsonParser();
 
-        return parser.parseResource(Patient.class, output);
+            return parser.parseResource(Patient.class, output);
+        } catch (MappingException e) {
+            String errorMessage = String.format("Failed to map GameBus player %s: %s", theId.getIdPart(), e);
+            throw new NotImplementedOperationException(errorMessage);
+        }
     }
 
 }

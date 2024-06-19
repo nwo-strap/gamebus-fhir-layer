@@ -33,8 +33,9 @@ import ca.uhn.fhir.rest.param.TokenOrListParam;
 import ca.uhn.fhir.rest.param.TokenParam;
 import ca.uhn.fhir.rest.param.TokenParamModifier;
 import ca.uhn.fhir.rest.server.IResourceProvider;
-import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
+import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 import kong.unirest.json.JSONArray;
+import kong.unirest.json.JSONObject;
 
 public class ObservationResourceProvider implements IResourceProvider {
 
@@ -51,30 +52,39 @@ public class ObservationResourceProvider implements IResourceProvider {
         // Request GameBus Activity
         String res = GamebusApiHandler.get("activities", theId.getIdPart(), authHeader);
 
+        // Get the activity name
+        JSONObject resJSON = new JSONObject(res);
+        JSONObject gameDescriptor = resJSON.getJSONObject("gameDescriptor");
+        String translationKey = gameDescriptor.getString("translationKey");
+
         // Run the mapping using Google Whistle
-        String resourcesStr = Mapping.run(res, "gwc.activity");
-        if (!resourcesStr.startsWith("[")) {
-            throw new ResourceNotFoundException(
-                    "Invalid mapped data. NOT YET support to map the corresponding"
-                            + " GameBus activity to FHIR Observation");
-        }
-
-        // Run filtering
-        JSONArray resources = new JSONArray(resourcesStr);
-        IParser parser = theRequestDetails.getFhirContext().newJsonParser();
-
-        Observation output = null;
-        for (Object resource : resources) {
-            try {
-                output = parser.parseResource(Observation.class, resource.toString());
-            } catch (DataFormatException e) {
-                // ignore the exception, filter out undesired resources
+        try {
+            String resourcesStr = Mapping.run(res, "gwc.activity");
+            if (!resourcesStr.startsWith("[")) {
+                String errorMessage = String.format("GameBus gameDescriptor %s (%s) is NOT supported yet.", translationKey, theId.getIdPart());
+                throw new NotImplementedOperationException(errorMessage);
             }
-            if (output != null) {
-                break;
+
+            // Run filtering
+            JSONArray resources = new JSONArray(resourcesStr);
+            IParser parser = theRequestDetails.getFhirContext().newJsonParser();
+
+            Observation output = null;
+            for (Object resource : resources) {
+                try {
+                    output = parser.parseResource(Observation.class, resource.toString());
+                } catch (DataFormatException e) {
+                    // ignore the exception, filter out undesired resources
+                }
+                if (output != null) {
+                    break;
+                }
             }
+            return output;
+        } catch (MappingException e) {
+            String errorMessage = String.format("Failed to map GameBus gameDescriptor %s (%s): %s", translationKey, theId.getIdPart(), e);
+            throw new NotImplementedOperationException(errorMessage);
         }
-        return output;
     }
 
     @Search
@@ -184,21 +194,25 @@ public class ObservationResourceProvider implements IResourceProvider {
         List<Observation> retVal = new ArrayList<>();
         IParser parser = theRequestDetails.getFhirContext().newJsonParser();
         for (Object activity : resJson) {
-            // Run mapping
-            String resourcesStr = Mapping.run(activity.toString(), "gwc.activity");
-            // ignore failed mapping caused by unsupported GameBus activity type
-            if (!resourcesStr.startsWith("[")) {
-                continue;
-            }
-
-            // Run filtering
-            JSONArray resources = new JSONArray(resourcesStr);
-            for (Object resource : resources) {
-                try {
-                    retVal.add(parser.parseResource(Observation.class, resource.toString()));
-                } catch (DataFormatException e) {
-                    // ignore the exception, filter out undesired resources
+            try {
+                // Run mapping
+                String resourcesStr = Mapping.run(activity.toString(), "gwc.activity");
+                // ignore failed mapping caused by unsupported GameBus activity type
+                if (!resourcesStr.startsWith("[")) {
+                    continue;
                 }
+
+                // Run filtering
+                JSONArray resources = new JSONArray(resourcesStr);
+                for (Object resource : resources) {
+                    try {
+                        retVal.add(parser.parseResource(Observation.class, resource.toString()));
+                    } catch (DataFormatException e) {
+                        // ignore the exception, filter out undesired resources
+                    }
+                }
+            } catch (MappingException e) {
+                // ignore the exception
             }
         }
 
