@@ -35,12 +35,18 @@ public class GamebusApiHandler {
                 })
                 .ifFailure(response -> {
                     if (response.getStatus() == HttpStatus.UNAUTHORIZED.value()) {
-                        throw new AuthenticationException("Invalid token for GameBus " + gamebusType + " " + id);
+                        throw new AuthenticationException("Invalid token for GameBus " + gamebusType + "/" + id);
                     } else {
-                        throw new ResourceNotFoundException("Failed GameBus request for " + gamebusType + ": " + id);
+                        throw new ResourceNotFoundException("Failed GameBus request for " + gamebusType + "/" + id);
                     }
                 });
-        return r.getBody();
+
+        String data = r.getBody();
+        if (data == null || data.isBlank()) {
+            throw new ResourceNotFoundException("GameBus returns empty result for " + gamebusType + "/" + id);
+        }
+
+        return data;
     }
 
     public static String search(String searchParams, String id, String auth) {
@@ -53,12 +59,17 @@ public class GamebusApiHandler {
                 })
                 .ifFailure(response -> {
                     if (response.getStatus() == HttpStatus.UNAUTHORIZED.value()) {
-                        throw new AuthenticationException("Invalid token for patient " + id);
+                        throw new AuthenticationException("Invalid token for GameBus " + id);
                     } else {
-                        throw new ResourceNotFoundException("Failed GameBus request");
+                        throw new ResourceNotFoundException("Failed GameBus request for " + id);
                     }
                 });
 
-        return r.getBody();
+        String data = r.getBody();
+        if (data == null || data.isBlank()) {
+            throw new ResourceNotFoundException("GameBus returns empty result for " + id);
+        }
+
+        return data;
     }
 }
