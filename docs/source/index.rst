@@ -36,27 +36,30 @@ The diagram below shows the relationship between GameBus system, FHIR layer, and
 **Highlights:**
 
 - Open source
+- Support FHIR R4
 - Smooth deployment as microservice
 - Adding/changing mappings with ease
 - Adding/changing operations for FHIR REST API with ease
 - Not only for GameBus, easy to adapt for other healthcare platforms
 
 
-Tutorials
----------
+Table of Contents
+-----------------
 
 .. toctree::
    :maxdepth: 3
 
    tutorial
 
-Guide for Development
----------------------
-
 .. toctree::
    :maxdepth: 4
 
    dev
+
+.. toctree::
+   :maxdepth: 4
+
+   faq
 
 .. _GameBus: https://blog.gamebus.eu/
 .. _FHIR: http://hl7.org/fhir/

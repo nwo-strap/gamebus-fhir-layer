@@ -1,8 +1,7 @@
 Develop FHIR server
 ===================
 
-This section guides you on how to set up the development environment for GameBus FHIR
-layer and how to start a local test FHIR server.
+This section will guide you on how to further develop the FHIR server for new functionalities.
 
 
 Set up dev environment
@@ -19,11 +18,6 @@ Set up dev environment
   FHIR server to convert data.
 
 **Step 3, set mapping configs**
-
-  Mapping configs are the rules used by Google Whistle mapping engine to convert
-  data from one format to another. The repo of mapping configs has pre-defined rules
-  for data conversion between GameBus and FHIR. It should be set properly to be used
-  in GameBus FHIR layer, see the steps below:
 
   First, clone mapping configs repo
 
@@ -49,15 +43,15 @@ Set up dev environment
     server by taking advantage of HAPI FHIR framework.
 
 
-Resource for developing FHIR server
------------------------------------
+Further develop the FHIR server
+-------------------------------
 
-Now it's ready for further development of FHIR server based on HAPI FHIR framework,
-e.g. adding or changing FHIR resources or operations.
+Now it's ready for further development of FHIR server, e.g. adding or updating FHIR resources and operations.
 
-HAPI FHIR website has `great documentation`_ for developers to build an FHIR server.
-Also, you could check existing code in :code:`gamebus-fhir-layer` repo to get
-a sense of how the HAPI FHIR framework works.
+You could first have a look at the code in `gamebus-fhir-layer repo`_ to get
+a sense of how the HAPI FHIR framework works. It's quite straightforward to add functionalities.
+
+HAPI FHIR website has `great documentation`_ for developers to develop the FHIR server.
 
 
 Start a local test server
@@ -77,9 +71,8 @@ Start a local FHIR server to test new functionalities:
         -Dgwc.activity="[mapping_configs_ABSOLUTE_PATH]/gamebus_fhir_r4/configurations/activity.textproto" \
         jetty:run
 
-- :code:`-D="jna.library.path=/usr/local/lib"` sets the path of mapping engine shared library
-- :code:`-Dgb.url="[GAMEBUS_API_URL]` sets the URL of GameBus REST API, which is
-  https://api3-new.gamebus.eu/v2.
+- :code:`-D="jna.library.path=/usr/local/lib"` sets the path of C shared library of the mapping engine.
+- :code:`-Dgb.url="[GAMEBUS_API_URL]` sets the URL of GameBus REST API (https://api3-new.gamebus.eu/v2).
 - :code:`-Dgwc.player="[mapping_configs_ABSOLUTE_PATH]/gamebus_fhir_r4/configurations/player.textproto"`
   sets the mapping config for GameBus player data. Replace the :code:`[mapping_configs_ABSOLUTE_PATH]`
   with the real value of the absolute path of the mapping configs repo (see step 3 above).
@@ -88,13 +81,17 @@ Start a local FHIR server to test new functionalities:
 
 By default, the server will be served at the base "http://localhost:8080".
 
-To test the FHIR server, it's required to add test data to GameBus,
-check :ref:`the tutorial<tutorial3_gamebus:gamebus>` to see how to add data to
-GameBus.
+
+You can check the available functionalities of the FHIR server by visiting the URL: http://localhost:8080/metadata.
+
+
+Before requesting data from the FHIR server, you need to add some example data to GameBus.
+Check the section :ref:`Add data to GameBus<tutorial3_gamebus:Add data to GameBus>` for more details.
 
 Then you can send HTTP requests to test the new functionalities of the FHIR server.
-See this tutorial about :ref:`how to request on FHIR REST API<tutorial4_fhir_api:request on fhir api>`.
+Check the section :ref:`Request on FHIR API<tutorial4_fhir_api:request on fhir api>` for more details.
 
+To validate the FHIR data returned by the server, please check the section :ref:`Validate FHIR data<dev3_dev_mapping_configs:Validate FHIR data>`.
 
 
 .. _Java JDK: https://openjdk.org/
@@ -102,3 +99,5 @@ See this tutorial about :ref:`how to request on FHIR REST API<tutorial4_fhir_api
 .. _HAPI FHIR's doc: https://hapifhir.io/hapi-fhir/docs/server_plain/introduction.html
 
 .. _great documentation: https://hapifhir.io/hapi-fhir/docs/server_plain/introduction.html
+
+.. _gamebus-fhir-layer repo: https://github.com/nwo-strap/gamebus-fhir-layer

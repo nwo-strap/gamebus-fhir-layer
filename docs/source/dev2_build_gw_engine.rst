@@ -44,15 +44,19 @@ Google Whistle codebase
 Compared with `original Google Whistle codebase`_, the `codebase used above`_
 is a forked codebase and updated with three new scripts:
 
-- `mapping_engine/build_exports.sh`_
-   It's a helper BASH script to generate Go code from protobuf files and then compile
-   Go code (e.g. export functions) to C shared library.
 
 - `mapping_engine/main/exports.go`_
    The export function :code:`RunMapping` is defined in this Go file,
    which converts JSON string of one structure to another.
 
    This Go file can be updated to add other export functions.
+
+-  `mapping_engine/main/mapping.h`_
+    This header file is needed by the C shared library to include the Go export functions.
+
+- `mapping_engine/build_exports.sh`_
+   It's a helper BASH script to generate Go code from protobuf files and then compile
+   Go code (e.g. export functions) to C shared library.
 
 - `Dockerfile`_
   The dockerfile to build a docker image of the mapping engine.
@@ -65,6 +69,7 @@ is a forked codebase and updated with three new scripts:
 .. _Clang: https://clang.llvm.org/get_started.html
 .. _adapted Google Whistle codebase: https://github.com/nwo-strap/healthcare-data-harmonization
 .. _original Google Whistle codebase: https://github.com/GoogleCloudPlatform/healthcare-data-harmonization
+.. _mapping_engine/main/mapping.h:  https://github.com/nwo-strap/healthcare-data-harmonization/blob/453b9dc60cb58973a72466d4273355d02774820d/mapping_engine/main/mapping.h
 .. _mapping_engine/build_exports.sh: https://github.com/nwo-strap/healthcare-data-harmonization/blob/453b9dc60cb58973a72466d4273355d02774820d/mapping_engine/build_exports.sh
 .. _mapping_engine/main/exports.go: https://github.com/nwo-strap/healthcare-data-harmonization/blob/453b9dc60cb58973a72466d4273355d02774820d/mapping_engine/main/exports.go
 .. _Dockerfile: https://github.com/nwo-strap/healthcare-data-harmonization/blob/453b9dc60cb58973a72466d4273355d02774820d/Dockerfile

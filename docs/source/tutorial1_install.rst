@@ -1,14 +1,5 @@
-Requirements
-============
-
-Note for Mac users
-------------------
-
-Mac with Apple silicon (e.g. M1, M2 cpu) is not supported
-
-
 Installation
-------------
+============
 
 - `Chrome browser`_ (it's required because of `Chrome DevTools`_)
 - Docker, see `how to install Docker`_

@@ -1,32 +1,29 @@
 Request on FHIR API
 ===================
 
-After :ref:`starting FHIR server<tutorial2_docker_run:start fhir server>` and
+After :ref:`starting FHIR server<tutorial2_docker_run:Start a GameBus FHIR server>` and
 :ref:`adding data to GameBus platform<tutorial3_gamebus:add data manually>` in
 previous sections, now it's ready to try the service of GameBus FHIR layer.
 
-The FHIR layer is a service layer on top of the GameBus platform, providing the FHIR REST API
-for communicating FHIR-compliant data with the outside. For example, when a user sends
-an HTTP GET request to FHIR REST API, the FHIR layer will transform this request and
-forward the transformed request to GameBus's API; GameBus will process the request,
-e.g. read the requested data from its database, and then return the relevant data in
-GameBus format to the FHIR layer; the FHIR layer will then transform the GameBus data to
-data in FHIR-compliant format, and then return the FHIR data to user as a HTTP
-response. That is how the FHIR layer works and how it enables GameBus to provide FHIR
-service.
+The FHIR layer is a service layer on top of the GameBus platform, offering the FHIR REST API
+to provide FHIR-compliant data. It works in the following way:
 
-To try and test the FHIR API, we need API clients to help send HTTP requests.
+- a user sends an HTTP GET request to the FHIR REST API, the FHIR layer will transform this request and forward the transformed request to GameBus's API;
+- GameBus will process the request, e.g. read the requested data from its database, and then return relevant data in GameBus format to the FHIR layer;
+- the FHIR layer will then transform the GameBus data to data in FHIR-compliant format, and then return the FHIR data to user as a HTTP response.
+
+To use the FHIR API, we need API clients to help send HTTP requests.
 Various API clients exist, e.g. `httpie`_, `Postman`_, `Hoppscotch`_ and `Insomnia`_.
 
 In this tutorial, we will use Hoppscotch. It's a web-based API client.
-Open its website(https://hoppscotch.io/) in a browser, then you can start
+Open its website (https://hoppscotch.io/) in a browser, then you can start
 sending HTTP requests.
 
 
 Check the capability of FHIR server
 -----------------------------------
 
-We can check the capability of the FHIR server by sending a request to
+It is important to first check the capability of a FHIR server. For that, you can send a request to
 :code:`[base]/metadata` API. We started the server of FHIR layer locally, so
 :code:`[base]` here is :code:`localhost:8080`.
 
@@ -51,8 +48,9 @@ supported by the current FHIR layer.
 Read FHIR resources
 -------------------
 
-This part will show how to read FHIR `Patient`_ and `Observation`_ resources.
-GameBus token, player id, and activity id will be required to send HTTP requests,
+This section will show how to read FHIR `Patient`_ and `Observation`_ resources.
+
+GameBus token, player id, and activity id are required to send HTTP requests,
 check :ref:`GameBus section <tutorial3_gamebus:Get activity id>` to
 get them.
 
@@ -163,13 +161,15 @@ Here are some examples you could try:
      - search all walk observations and return only "code" and "subject.reference" parts of the Observation resource
 
 
-⚠️ Note that the search parameter :code:`patient` is always required to specify
-which patient (GameBus player) to query. When changing the patient (i.e. player id),
-you also need to change the token to the one associated with that patient (GameBus player).
+.. Note::
+
+    The search parameter :code:`patient` is always required to specify
+    which patient (GameBus player) to query. When changing the patient (i.e. player id),
+    you also need to update the token to the one associated with that patient (GameBus player).
 
 
-Useful links
-------------
+Cheat Sheet
+-----------
 
 👉 Here is a `cheat sheet`_ for FHIR REST APIs.
 
@@ -185,5 +185,5 @@ Useful links
 .. _Observation: https://www.hl7.org/fhir/observation.html
 .. _Bundle: https://www.hl7.org/fhir/bundle.html
 .. _cheat sheet: https://confluence.hl7.org/display/FHIR/FHIR+Cheatsheets
-.. _FHIR specification: http://hl7.org/fhir/http.html#3.1.0
+.. _FHIR specification: https://hl7.org/fhir/R4/http.html
 .. _curl: https://curl.se/
