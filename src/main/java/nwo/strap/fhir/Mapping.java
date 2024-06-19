@@ -18,7 +18,7 @@ public class Mapping {
      *               {@code config.properties} file.
      * @return Mapped JSON string
      */
-    public static String run(String input, String config) {
+    public static String run(String input, String config) throws MappingException {
 
         GWMapping.GoString.ByValue in = new GWMapping.GoString.ByValue();
         in.p = input;
@@ -30,7 +30,12 @@ public class Mapping {
 
         GWMapping lib = GWMapping.INSTANCE;
 
-        return lib.RunMapping(in, conf);
-    }
+        MappingResult result = lib.RunMapping(in, conf);
 
+        if (result.error != null){
+            throw new MappingException(result.error);
+        }
+
+        return result.result;
+    }
 }

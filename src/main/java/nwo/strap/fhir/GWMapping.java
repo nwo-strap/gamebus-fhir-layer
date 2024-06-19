@@ -20,5 +20,5 @@ public interface GWMapping extends Library {
         public long n;
     }
 
-    public String RunMapping(GoString.ByValue input, GoString.ByValue config);
+    public MappingResult RunMapping(GoString.ByValue input, GoString.ByValue config);
 }
