@@ -6,7 +6,7 @@
 
 
 This is a framework to enable [GameBus](https://blog.gamebus.eu/) platform to
-provide [FHIR](http://hl7.org/fhir/) service.
+provide [FHIR](http://hl7.org/fhir/) (version R4) service.
 
 It is built on a technology stack of open source software and consists of two main parts: a mapping engine and a FHIR web server (see diagram below). The two components are integrated into the FHIR layer in order for GameBus to provide FHIR compliant data.
 
