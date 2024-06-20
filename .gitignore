@@ -1,5 +1,6 @@
 target
 src/main/resources/config.properties
+docs/source/_build
 
 .vscode
 .DS_Store
