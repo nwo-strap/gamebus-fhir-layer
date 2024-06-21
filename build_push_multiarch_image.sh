@@ -2,9 +2,12 @@
 
 if [ $# == 0 ]; then
     echo
-    echo "This script will build the multiarch image for the gamebus-fhir-layer and push it to the docker hub (account 'nlesc')."
+    echo "This script will build the multiarch image for 'gamebus-fhir-layer' and push it to the docker hub (account 'nlesc')."
     echo "Make sure you have access to docker account 'nlesc' and have installed docker and docker buildx."
-    echo "---------------------------------------------"
+    echo
+    echo "To build and load a image into Docker daemon for testing, please use the script 'build_load_image.sh'."
+    echo "--------------------------------------------------------------------------------------------------------"
+    echo
     echo "Usage: $0 image_version"
     echo "Example: $0 v0.0.3"
     echo
@@ -19,4 +22,5 @@ docker buildx build --platform linux/arm64,linux/amd64 -t nlesc/gamebus-fhir-lay
     --build-context gw-src=../healthcare-data-harmonization \
     --build-context gw-config-src=../mapping_configs \
     --build-context gamebus-fhir-src=. \
-    . --push
+    --push \
+    .
